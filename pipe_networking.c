@@ -47,7 +47,8 @@ int server_connect(int from_client) {
 
   //read initial message
   b = read(from_client, buffer, sizeof(buffer));
-  printf("[subserver] handshake received: -%s-\n", buffer);
+  int numid = atoi(buffer);
+  printf("[subserver %d] handshake received: -%s-\n", numid, buffer);
 
 
   to_client = open(buffer, O_WRONLY, 0);
@@ -61,10 +62,10 @@ int server_connect(int from_client) {
   read(from_client, buffer, sizeof(buffer));
   int ra = atoi(buffer);
   if (ra != r+1) {
-    printf("[subserver] handshake received bad ACK: -%s-\n", buffer);
+    printf("[subserver %d] handshake received bad ACK: -%s-\n", numid, buffer);
     exit(0);
   }//bad response
-  printf("[subserver] handshake received: -%s-\n", buffer);
+  printf("[subserver %d] handshake received: -%s-\n", numid, buffer);
 
   return to_client;
 }
