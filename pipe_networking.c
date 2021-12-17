@@ -14,6 +14,16 @@
   =========================*/
 int server_setup() {
   int from_client = 0;
+
+  mkfifo(WKP,0644);
+  printf("[server] made pipe\n");
+
+  from_client = open(WKP, O_RDONLY);
+  printf("[server] opened and blocking\n");
+
+  remove(WKP);
+  printf("[server] sucessfully received a message\n");
+
   return from_client;
 }
 
@@ -27,6 +37,10 @@ int server_setup() {
   =========================*/
 int server_connect(int from_client) {
   int to_client  = 0;
+
+  from_client = open(WKP, O_RDONLY);
+  to_client = open(ACK, O_WRONLY);
+
   return to_client;
 }
 
