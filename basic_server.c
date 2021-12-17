@@ -23,8 +23,9 @@ int main() {
     int f = fork();
 
     if (f == 0) { // child
+      // printf("running\n");
       to_client = server_connect(from_client);
-      from_client = server_handshake( &to_client );
+      // from_client = server_handshake( &to_client );
       // printf("pid: %d\tfrom_client: %d\tto_client: %d\n", getpid(), from_client, to_client);
       
       // get input from client
